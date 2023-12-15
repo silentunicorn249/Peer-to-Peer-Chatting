@@ -71,6 +71,18 @@ def handleCommand(data: str, c: socket):
             res = users.encode()
             print(f"Sending {res}")
             c.send(res)
+        elif command =="logout":
+            if authedClients.get(c):
+                del authedClients[c]
+                res = b"Logged Out"
+                print(f"Sending {res}")
+                c.send(res)
+                return
+            if not authedClients.get(c):
+                res = b"Already Logged Out"
+                print(f"Sending {res}")
+                c.send(res)
+                return
     
         else:
             c.send(b"Unknown command")
