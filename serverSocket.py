@@ -57,7 +57,16 @@ class Server:
                     users += value + "\n"
 
                 self.sendMessage(users, client)
-
+            elif command =="logout":
+                if self.authedClients.get(c):
+                    del self.authedClients[c]
+                    res = b"Logged Out"
+                    print(f"Sending {res}")
+                    client.send(res)
+                    return
+                if not self.authedClients.get(c):
+                    self.sendMessage("Already Logged Out", client)
+                    return
             else:
                 client.send(b"Unknown command")
 
