@@ -27,7 +27,7 @@ class Server:
                     return
                 for key, item in self.clientsDB.items():
                     if username == key:
-                        self.sendMessage("Enta ya 7ayawan ya mota5alef",client)
+                        self.sendMessage("Enta ya 7ayawan ya mota5alef", client)
                         return
 
                 self.clientsDB[username] = password
@@ -45,7 +45,7 @@ class Server:
                     self.sendMessage("Password is incorrect", client)
                     return
                 self.authedClients[client] = username
-                self.sendMessage("Logged in success", client)
+                self.sendMessage("LOGIN OK", client)
                 print(f"Logged in users now are {self.authedClients}")
 
             elif command == "onlineusers":
@@ -57,7 +57,7 @@ class Server:
                     users += value + "\n"
 
                 self.sendMessage(users, client)
-            elif command =="logout":
+            elif command == "logout":
                 if self.authedClients.get(c):
                     del self.authedClients[c]
                     res = b"Logged Out"
@@ -79,7 +79,7 @@ class Server:
             try:
                 data = c.recv(1024).decode()
                 if data:
-                    print(f"Received data \"{data}\" from {a}")
+                    print(f'Received data "{data}" from {a}')
                     self.handle_command(data, c)
                 else:
                     print(f"Client {c} disconnected")
